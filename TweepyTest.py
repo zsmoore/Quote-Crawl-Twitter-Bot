@@ -3,9 +3,9 @@ import json
 import sys
 import random
 
-def auth_setup():
+def auth_setup(authFile):
     
-    with open("auth_info.json") as data_file:
+    with open(authFile) as data_file:
         data = json.load(data_file)
 
     consumer_key = data["consumer_key"]
@@ -37,14 +37,29 @@ def get_tweet(inFile):
 
     return random.choice(possible)
 
+
+def get_random_user(inFile):
+
+    with open(inFile) as data_file:
+        data = json.load(data_file)
+
+    users = data["dm_users"]
+
+    return random.choice(users)
+
 def main():
 
-    auth = auth_setup()
+    authFile = sys.argv[1]
+    argFile = sys.argv[2]
+    quoteFile = sys.argv[3]
+
+    auth = auth_setup(authFile)
     api = tweepy.API(auth)
 
-    filename = sys.argv[1]
-    tweet = get_tweet(open(filename, "r"))
-    api.send_direct_message(user='TylerOrlando28', text=tweet)
+    user = get_random_user(argFile)
+    tweet = get_tweet(open(quoteFile, "r"))
+    
+    api.send_direct_message(user=user, text=tweet)
 
 if __name__ == "__main__":
     main()
