@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 
-def base(output):
+def base(output, tag):
     
     
-    r = requests.get("http://www.goodreads.com/quotes/tag/sad")
+    r = requests.get("http://www.goodreads.com/quotes/tag/" + tag)
     html = r.content
     soup = BeautifulSoup(html, "html.parser")
     
@@ -30,9 +30,12 @@ def sub_page(soup):
 
 
 def main():
+    
     filename = sys.argv[1]
+    tag = sys.argv[2]
+
     output = open(filename, "w")
-    base(output)
+    base(output, tag)
 
 
 if __name__ == "__main__":
