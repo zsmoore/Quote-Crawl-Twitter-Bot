@@ -1,24 +1,17 @@
-# TweepyTest1.0
-Getting familiar with Tweepy Library to use in other projects
-
-
-Usage:
-
-grabQuotes:
-input:  
-filename  
-tag to grab  
+# Quote Crawl Twitter Bot
+Crawling for quotes online and sending dms to input users
+## Usage  
+1. grab_quotes  
+   Input:
+   1. Output Filename  
+   2. Quote Tag to Grab  
+2. dm_quote_bot  
+   Input:
+   1. Auth Json File  
+   2. Argument Json File
+   3. Text File to grab Quotes from
   
-Will grab every quote associated with that tag. Get the quote text.    
-Write to File specified with 'DELIM' between quotes for easy splitting.  
-  
-TweepyTest:  
-input:  
- auth_file with api keys  
-  args for user reference  
-  quote file to grab from  
-         
-Will initialize api from auth_file.  
-Will grab random user from args file.  
-Will grab random quote from quote file.  
-Will Direct message a random quote to a random user.  
+Program uses GoodReads to grab quotes from based off of specified tag and store them into a text file.  
+Quote bot fill will grab from file and use json inputs to dm users a random quote from given quote file.  
+
+### Note: Sample Json inputs sit in the repository
