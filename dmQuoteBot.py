@@ -2,6 +2,7 @@ import tweepy
 import json
 import sys
 import random
+import time
 
 def auth_setup(authFile):
     
@@ -45,8 +46,8 @@ def get_random_user(inFile):
 
     users = data["dm_users"]
 
-    return random.choice(users)
-
+    return random.choice(users)    
+    
 def main():
 
     authFile = sys.argv[1]
@@ -56,10 +57,19 @@ def main():
     auth = auth_setup(authFile)
     api = tweepy.API(auth)
 
-    user = get_random_user(argFile)
-    tweet = get_tweet(open(quoteFile, "r"))
-    
-    api.send_direct_message(user=user, text=tweet)
+    while True:
+
+
+        user = get_random_user(argFile)
+        tweet = get_tweet(open(quoteFile, "r"))
+
+        try:
+            api.send_direct_message(user=user, text=tweet)
+        except TweepError as e: 
+            continue
+
+        time.sleep(300)
+
 
 if __name__ == "__main__":
     main()
